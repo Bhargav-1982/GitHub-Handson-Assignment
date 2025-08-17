@@ -1,0 +1,52 @@
+name: grade
+
+on:
+  push:
+    paths:
+      - '**.c'
+      - '**.sh'
+      - '**.txt'
+      - '**/Makefile'
+  workflow_dispatch:
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout student submission
+        uses: actions/checkout@v4
+
+      - name: Set up directory structure for tests
+        run: |
+          mkdir -p Testing/Testcases
+          mkdir -p Testing/Expected_Output
+          mkdir -p Results
+
+          # Move test inputs and outputs if placed at root
+          mv input*.txt Testing/Testcases/ 2>/dev/null || true
+          mv output*.txt Testing/Expected_Output/ 2>/dev/null || true
+
+      - name: Make autograder executable
+        run: chmod +x autograder.sh
+
+      - name: Run autograder
+        run: ./autograder.sh
+
+      - name: Convert summary.txt to CSV
+        run: |
+          # Extract fields and convert to CSV format
+          awk -F ': ' '
+          BEGIN {
+              print "Field,Value"
+          }
+          {
+              gsub(/ /, "_", $1);
+              print $1 "," $2
+          }' Results/summary.txt > Results/grade_summary.csv
+
+      - name: Upload grading results
+        uses: actions/upload-artifact@v4
+        with:
+          name: grading-results
+          path: Results/
