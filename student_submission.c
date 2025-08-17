@@ -1,28 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
-{
-    float num1=0.0f, num2=0.0f;
+/*
+ * Assignment: Basic Calculator Operations
+ * Task: Refer to the README file and follow these instructions carefully.
+ *
+ * Instructions:
+ * - Declare variables for two floating-point numbers
+ * - Prompt user for input and read two numbers
+ * - Calculate addition, subtraction, multiplication, and division
+ * - Handle division by zero error appropriately
+ * - Print each result with appropriate labels
+ * - Use proper exit codes for success/failure
+ */
 
-    printf("Enter two numbers\n");
-    scanf("%f%f", &num1, &num2);
-
-    printf("Addition Result = %f\n", num1 + num2);
-    printf("Subtraction Result = %f\n", num1 - num2);
-    printf("Multiplication Result = %f\n", num1 * num2);
-   
-    if (num2 == 0.0f)
-    {
-        printf("ERROR: division-by-zero. Aborting...\n");
-        return EXIT_FAILURE;
-    }
-    else
-    {
-           printf("Division Result = %f\n", num1 / num2);
-    }
-
-    printf("Successful execution. Exiting program...\n");
-
+int main() {
+    // TODO: Declare variables for two floating-point numbers
+    
+    // TODO: Prompt user to enter two numbers
+    
+    // TODO: Read the two numbers from user input
+    
+    // TODO: Calculate and display addition result
+    
+    // TODO: Calculate and display subtraction result
+    
+    // TODO: Calculate and display multiplication result
+    
+    // TODO: Check for division by zero
+    // If num2 is zero:
+    //   - Print error message about division by zero
+    //   - Return EXIT_FAILURE
+    // Otherwise:
+    //   - Calculate and display division result
+    
+    // TODO: Print success message
+    
     return EXIT_SUCCESS;
 }
