@@ -467,15 +467,15 @@ echo
 
 CSV_FILE="Results/grade_summary.csv"
 
-# Create header if CSV doesn't exist yet
-if [[ ! -f "$CSV_FILE" ]]; then
-    echo "github_username,assignment_name,final_score" > "$CSV_FILE"
-fi
+# Remove any existing CSV file first
+rm -f "$CSV_FILE"
 
-# Append this student's result as a row
-echo "${GITHUB_ACTOR:-Unknown},${ASSIGNMENT_NAME},$FINAL_SCORE" >> "$CSV_FILE"
+# Create clean CSV file with header and data
+{
+    echo "github_username,assignment_name,final_score"
+    echo "${GITHUB_ACTOR:-Unknown},${ASSIGNMENT_NAME},$FINAL_SCORE"
+} > "$CSV_FILE"
 
-echo "📝 CSV row written to $CSV_FILE"
 
 
 # =============================================================================
