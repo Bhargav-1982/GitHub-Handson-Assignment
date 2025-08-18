@@ -462,6 +462,23 @@ echo "💡 Remember: You can resubmit as many times as you want before the deadl
 echo
 
 # =============================================================================
+# STEP 6: EXPORT GRADES TO CSV (Minimal Format)
+# =============================================================================
+
+CSV_FILE="Results/grade_summary.csv"
+
+# Create header if CSV doesn't exist yet
+if [[ ! -f "$CSV_FILE" ]]; then
+    echo "github_username,assignment_name,final_score" > "$CSV_FILE"
+fi
+
+# Append this student's result as a row
+echo "${GITHUB_ACTOR:-Unknown},${ASSIGNMENT_NAME},$FINAL_SCORE" >> "$CSV_FILE"
+
+echo "📝 CSV row written to $CSV_FILE"
+
+
+# =============================================================================
 # SAVE ENHANCED RESULTS
 # =============================================================================
 
@@ -480,5 +497,7 @@ echo
     echo "INDIVIDUAL_TEST_SCORES: ${TEST_SCORES[*]}"
     echo "TIMESTAMP: $(date)"
 } > Results/summary.txt
+
+
 
 exit 0
